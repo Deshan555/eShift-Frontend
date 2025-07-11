@@ -33,17 +33,35 @@ const menuItems = [
   { key: 'trip', icon: <CompassOutlined />, label: 'Trip', path: '/trip' },
 ];
 
-const SideNav = () => (
-  <Sider breakpoint="lg" collapsedWidth="0">
-    <div style={{ height: 32, margin: 16, background: 'rgba(255,255,255,0.2)' }} />
-    <Menu theme="dark" mode="inline" defaultSelectedKeys={['admins']}>
-      {menuItems.map(item => (
-        <Menu.Item key={item.key} icon={item.icon}>
-          <Link href={item.path}>{item.label}</Link>
-        </Menu.Item>
-      ))}
-    </Menu>
-  </Sider>
-);
+
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+
+const SideNav = () => {
+  const [collapsed, setCollapsed] = useState(false);
+  const router = useRouter();
+  // Find the menu item whose path matches the current route
+  const selectedKey = menuItems.find(item => router.pathname.startsWith(item.path))?.key || 'admins';
+  return (
+    <Sider
+      collapsible
+      collapsed={collapsed}
+      onCollapse={setCollapsed}
+      breakpoint="lg"
+      theme='light'
+      collapsedWidth={80}
+      style={{ minHeight: '100vh' }}
+    >
+      <div style={{ height: 32, margin: 16, background: 'rgba(255,255,255,0.2)' }} />
+      <Menu theme="light" mode="inline" selectedKeys={[selectedKey]}>
+        {menuItems.map(item => (
+          <Menu.Item key={item.key} icon={item.icon}>
+            <Link href={item.path}><span className='poppins-regular' style={{ fontSize: 12 }}>{item.label}</span></Link>
+          </Menu.Item>
+        ))}
+      </Menu>
+    </Sider>
+  );
+};
 
 export default SideNav;
