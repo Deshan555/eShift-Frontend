@@ -1,0 +1,278 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.custom-body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.custom-Input {
+  border-radius: 8px !important;
+  background-color: white;
+  border: 1px solid #bdbdbd;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  width:100% !important;
+  height: 36px;
+}
+
+.custom-Input-Field {
+  border-radius: 10px !important;
+  background-color: white;
+  border: 1px solid #d5d5d5;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  height: 36px;
+}
+
+.custom-Input-User {
+  border-radius: 10px !important;
+  background-color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  height: 36px;
+}
+
+.custom-Input-Group {
+  background-color: white;
+  border: 1px solid #F5F5F5;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  width: 460px;
+  height: 38px;
+}
+
+.custom-Select {
+  border-radius: 10px !important;
+  background-color: white;
+  border: 1px solid #d5d5d5;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px !important;
+  font-weight: 400;
+  line-height: 1.5;
+  width: 460px;
+  min-height: 38px !important; 
+}
+
+.custom-Select .ant-select-selection-placeholder {
+  font-size: 12px !important;
+}
+
+.custom-Select::placeholder {
+  font-size: 12px !important;
+}
+
+.custom-Select .ant-select-selection-item {
+  font-size: 12px !important;
+}
+
+.borderedSelect {
+  width: 100%;
+  height: 34px;
+  font-size: 11px;
+  font-family: 'Poppins', 'sans-serif';
+  border-radius: 8px !important; /* Ensure this is the final rule */
+}
+
+.borderedSelect .ant-picker-input > input {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.custom-DatePicker {
+  border-radius: 8px !important;
+  background-color: white;
+  border: 1px solid #B58FF6;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  width: 460px;
+  height: 36px;
+}
+
+.custom-DatePicker .ant-picker-input {
+  font-size: 12px !important;
+  border-radius: 8px !important;
+}
+
+.custom-DatePicker .ant-picker-input > input {
+  font-size: 12px !important;
+  border-radius: 8px !important;
+}
+
+.primery-button {
+  width: 90px !important;
+  height: 38px !important;
+  border-radius: 8px !important;
+  background-color: #6011E8 !important;
+  border: none !important;
+  color: white !important;
+  cursor: pointer !important;
+}
+
+.primery-button:hover {
+  background-color: #B58FF6 !important;
+}
+
+.primery-button:active {
+  background-color: #6011E8 !important;
+}
+
+.login-button {
+  height: 38px !important;
+  border-radius: 8px !important;
+  background-color: #6011E8 !important;
+  border: none !important;
+  color: white !important;
+  cursor: pointer !important;
+}
+
+.login-button:hover {
+  background-color: #B58FF6 !important;
+}
+
+.login-button:active {
+  background-color: #6011E8 !important;
+  background-color: #B58FF6 !important;
+}
+
+.primery-button:active {
+  background-color: #6011E8 !important;
+}
+
+.cancle-button {
+  width: 90px !important;
+  height: 38px !important;
+  border-radius: 8px !important;
+  background-color: #ABAAB2 !important;
+  border: none !important;
+  color: #ffffff !important;
+  cursor: pointer !important;
+}
+
+.cancle-button:hover {
+  background-color: #B58FF6 !important;
+  color: white !important;
+}
+
+.cancle-button:active {
+  background-color: #F2F2F2 !important;
+  color: #6011E8 !important;
+}
+
+.custom-modal .ant-modal-content {
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 0 !important;
+}
+
+.modal-header-user {
+  position: relative;
+  width: '100vw';
+  height: 70px;
+  overflow: hidden;
+}
+
+.banner-img-user {
+  width: 100%;
+  height: 20px;
+  object-fit: cover;
+  display: block;
+  background-color: #F0E8FF;
+}
+
+.header-title-user {
+  position: absolute;
+  top: 50%;
+  left: 12%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.modal-body-user {
+  padding: 20px;
+}
+
+.modal-header {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.header-title {
+  position: absolute;
+  top: 50%;
+  left: 12%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.modal-body {
+  margin: 0px 20px 20px 20px !important;
+}
+
+.custom-textarea {
+  width: 830px !important;
+  height: 60px !important;
+}
+
+.table-striped-rows tr:nth-child(2n) td {
+  background-color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+}
+.table-striped-rows thead {
+  background-color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+}
+
+.textStyle-small {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.textStyles-small {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.react-resizable {
+  position: relative;
+  background-clip: padding-box;
+}
+
+.react-resizable-handle {
+  position: absolute;
+  right: -5px;
+  bottom: 0;
+  z-index: 1;
+  width: 10px;
+  height: 100%;
+  cursor: col-resize;
+}
