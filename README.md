@@ -38,3 +38,19 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+
+# ✅ Project Task Table
+
+| No. | Task Description                                                                 | Effort (Days) | Complexity | Priority | Completed |
+|-----|-----------------------------------------------------------------------------------|---------------|------------|----------|-----------|
+| 1   | The Application User Interface                                                   | 2             | 5          | 10       | ❌        |
+| 2   | Task 1: Customer Details and Management                                           | 2             | 5          | 10       | ❌        |
+| 3   | Task 2: Only Admin Can Manage Admin Details                                       | 3             | 5          | 15       | ❌        |
+| 4   | Task 3: Admin Login and Customer Login                                            | 2             | 5          | 10       | ❌        |
+| 5   | Task 4: Customer Transport Operation Detail Management                            | 3             | 5          | 15       | ❌        |
+| 6   | Task 5: Only Admin Can Accept/Decline and Update Customer Transport Operation     | 3             | 5          | 15       | ❌        |
+| 7   | Task 6: Customer Dashboard                                                        | 3             | 5          | 15       | ❌        |
+| 8   | Task 7: Admin Dashboard                                                           | 2             | 5          | 10       | ❌        |
+| 9   | Task 8: Only Admin Can Manage Product Details                                     | 2             | 5          | 10       | ❌        |
+| 10  | Task 9: Only Admin Can Generate Various Reports                                   | 2             | 5          | 10       | ❌        |
+| 11  | Task 10: Admin Dashboard                                                          | 2             | 5          | 10       | ❌        |
