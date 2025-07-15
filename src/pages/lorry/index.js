@@ -1,11 +1,6 @@
 import React from 'react';
-import DashboardLayout from '../../components/DashboardLayout';
+import LorryManagement from './management';
 
-const LorryPage = () => (
-  <DashboardLayout>
-    <h1>Lorry</h1>
-    <p>Manage lorries here.</p>
-  </DashboardLayout>
-);
+const LorryPage = () => <LorryManagement />;
 
 export default LorryPage;
