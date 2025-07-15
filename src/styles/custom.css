@@ -250,6 +250,16 @@
     font-size: 12px;
 }
 
+.table-striped-rows tbody tr:nth-child(1n) td{
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+}
+.table-striped-rows tbody tr:nth-child(2n) td {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+}
+
+
 .textStyle-small {
   font-family: 'Poppins', sans-serif;
   font-size: 12px;
@@ -276,3 +286,11 @@
   height: 100%;
   cursor: col-resize;
 }
+
+.ant-form-item-label > label {
+      font-family: 'Poppins', sans-serif !important;
+      font-size: 12px !important;
+      font-weight: 500 !important;
+      line-height: 1.5 !important;
+    }
+
