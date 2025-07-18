@@ -6,6 +6,7 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
   transpilePackages: [
     'rc-util',
+    'rc-table',
     "rc-picker",
     "rc-pagination",
     "@ant-design/icons-svg"
