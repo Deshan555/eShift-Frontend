@@ -1,11 +1,2 @@
-import React from 'react';
-import DashboardLayout from '../../components/DashboardLayout';
-
-const JobsPage = () => (
-  <DashboardLayout>
-    <h1>Jobs</h1>
-    <p>Manage jobs here.</p>
-  </DashboardLayout>
-);
-
-export default JobsPage;
+import dynamic from "next/dynamic";
+export default dynamic(() => import('./jobPage'), { ssr: false });
