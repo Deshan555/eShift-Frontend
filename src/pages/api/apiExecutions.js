@@ -1361,7 +1361,83 @@ const apiExecutions = {
       console.error(errorMsg, error);
       throw new Error(errorMsg);
     }
-  }
+  },
+  createNewCustomer: async (customerData) => {
+    try {
+      const response = await axios.post(`${apiConfigurations.baseUrl}/api/Customer`, customerData);
+      if (response.status >= 200 && response.status < 300) {
+        return response.data;
+      } else {
+        throw new Error(`Failed to create customer: ${response.message}`);
+      }
+    } catch (error) {
+      let errorMsg = 'createNewCustomer error:';
+      if (error.response && error.response.data) {
+        if (typeof error.response.data === 'string') {
+          errorMsg += ' ' + error.response.data;
+        } else if (error.response.data.message) {
+          errorMsg += ' ' + error.response.data.message;
+        } else {
+          errorMsg += ' ' + JSON.stringify(error.response.data);
+        }
+      } else if (error.message) {
+        errorMsg += ' ' + error.message;
+      }
+      console.error(errorMsg, error);
+      throw new Error(errorMsg);
+    }
+  },
+  updateCustomerById: async (id, customerData) => {
+    try {
+      const response = await axios.put(`${apiConfigurations.baseUrl}/api/Customer/${id}`, customerData);
+      if (response.status >= 200 && response.status < 300) {
+        return response.data;
+      } else {
+        throw new Error(`Failed to update customer: ${response.message}`);
+      }
+    } catch (error) {
+      let errorMsg = 'updateCustomerById error:';
+      if (error.response && error.response.data) {
+        if (typeof error.response.data === 'string') {
+          errorMsg += ' ' + error.response.data;
+        } else if (error.response.data.message) {
+          errorMsg += ' ' + error.response.data.message;
+        } else {
+          errorMsg += ' ' + JSON.stringify(error.response.data);
+        }
+      } else if (error.message) {
+        errorMsg += ' ' + error.message;
+      }
+      console.error(errorMsg, error);
+      throw new Error(errorMsg);
+    }
+  },
+  loginCustomer: async (loginData) => {
+    try {
+      const response = await axios.post(`${apiConfigurations.baseUrl}/api/Customer/login`, loginData);
+      if (response.status >= 200 && response.status < 300) {
+        return response.data;
+      } else {
+        throw new Error(`Failed to login customer: ${response.message}`);
+      }
+    } catch (error) {
+      let errorMsg = 'loginCustomer error:';
+      if (error.response && error.response.data) {
+        if (typeof error.response.data === 'string') {
+          errorMsg += ' ' + error.response.data;
+        } else if (error.response.data.message) {
+          errorMsg += ' ' + error.response.data.message;
+        } else {
+          errorMsg += ' ' + JSON.stringify(error.response.data);
+        }
+      } else if (error.message) {
+        errorMsg += ' ' + error.message;
+      } 
+      console.error(errorMsg, error);
+      throw new Error(errorMsg);
+    }
+  },
+
 }
 
 export default apiExecutions;
