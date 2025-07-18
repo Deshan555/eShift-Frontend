@@ -104,11 +104,13 @@
 .custom-DatePicker .ant-picker-input {
   font-size: 12px !important;
   border-radius: 8px !important;
+  font-family:  'Poppins', sans-serif !important;
 }
 
 .custom-DatePicker .ant-picker-input > input {
   font-size: 12px !important;
   border-radius: 8px !important;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 .primery-button {
@@ -293,4 +295,49 @@
       font-weight: 500 !important;
       line-height: 1.5 !important;
     }
+
+.ant-form-item-explain-error {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    color: red !important;
+}
+
+
+  .ant-descriptions, .ant-descriptions-item-label, .ant-descriptions-item-content {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+  }
+
+  /* Ant Design Tabs Customization */
+  .ant-tabs-nav {
+    font-family: 'Poppins', monospace, monospace !important;
+  }
+  .ant-tabs-tab {
+    font-family: 'Poppins', monospace, monospace !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: #6011E8 !important;
+    transition: color 0.2s;
+  }
+  .ant-tabs-ink-bar {
+    background: #6011E8 !important;
+    height: 2px !important;
+  }
+
+  .ant-steps-item-title {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    line-height: 1.5 !important;
+  }
+
+.ant-steps-item-description {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+  }
 
