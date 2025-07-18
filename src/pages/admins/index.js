@@ -9,7 +9,7 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 const AdminsPage = () => {
   const [admins, setAdmins] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
-  const [isModalVisible, setIsModalVisible] = React.useState(true);
+  const [isModalVisible, setIsModalVisible] = React.useState(false);
   const [isEdit, setIsEdit] = React.useState(false);
   const [isView, setIsView] = React.useState(false);
   const [selectedAdmin, setSelectedAdmin] = React.useState(null);
@@ -62,7 +62,7 @@ const AdminsPage = () => {
         </div>
         <Button
           type="primary"
-          style={{ backgroundColor: '#320A6B', borderColor: '#320A6B', height: 38, boorderRadius: 10 }}
+          style={{ backgroundColor: '#320A6B', borderColor: '#320A6B', height: 38, boorderRadius: 12 }}
           onClick={() => {
             setIsModalVisible(true);
             setIsEdit(false);
@@ -106,7 +106,7 @@ const AdminsPage = () => {
       <Table
         style={{ marginTop: 30 }}
         dataSource={admins} loading={loading} rowKey="adminId" className='table-striped-rows' pagination={admins?.length > 10 ? { pageSize: 10 } : false}>
-        <Table.Column title="Username" dataIndex="username" render={(text) => <span className='textStyle-small' style={{ fontSize: 12 }}>{text}</span>} />
+        <Table.Column title="User Name" dataIndex="username" render={(text) => <span className='textStyle-small' style={{ fontSize: 12 }}>{text}</span>} />
         <Table.Column title="Full Name" dataIndex="fullName" render={(text) => <span className='textStyle-small' style={{ fontSize: 12 }}>{text}</span>} />
         <Table.Column title="Email" dataIndex="emailAddress" render={(text) => <span className='textStyle-small' style={{ fontSize: 12 }}>{text}</span>} />
         <Table.Column title="Address" dataIndex="addressLine" render={(text) => <span className='textStyle-small' style={{ fontSize: 12 }}>{text}</span>} />
