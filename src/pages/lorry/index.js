@@ -1,6 +1,11 @@
-import React from 'react';
-import LorryManagement from './management';
+import dynamic from "next/dynamic";
 
-const LorryPage = () => <LorryManagement />;
+// import React from 'react';
+// import LorryManagement from './management';
 
-export default LorryPage;
+// const LorryPage = () => <LorryManagement />;
+
+// export default LorryPage;
+
+
+export default dynamic(() => import('./management'), { ssr: false });
