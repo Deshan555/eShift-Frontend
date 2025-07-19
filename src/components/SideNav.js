@@ -52,8 +52,13 @@ const SideNav = () => {
       collapsedWidth={80}
       style={{ minHeight: '100vh' }}
     >
-      <div style={{ height: 32, margin: 16, background: 'rgba(255,255,255,0.2)' }} />
-      <Menu theme="light" mode="inline" selectedKeys={[selectedKey]}>
+      {
+        collapsed ? <img src="/mini.png" alt="Logo" style={{ width: 'auto', height: 30, margin: '16px auto', display: 'block' }} /> : <>
+          <img src="/app.jpeg" alt="Logo" style={{ width: 'auto', height: 30, margin: '16px auto', display: 'block' }} />
+        </>
+      }
+      <Menu
+        theme="light" mode="inline" selectedKeys={[selectedKey]}>
         {menuItems.map(item => (
           <Menu.Item key={item.key} icon={item.icon}>
             <Link href={item.path}><span className='poppins-regular' style={{ fontSize: 12 }}>{item.label}</span></Link>
