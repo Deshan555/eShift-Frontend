@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import JobCard from './components/JobCard';
 import { DeleteFilled, EditFilled, EyeFilled, PlusOutlined } from '@ant-design/icons';
-import { Row, Col, Avatar, Modal, Button } from 'antd';
+import { Row, Col, Avatar, Modal, Button, Popover } from 'antd';
 import apiExecutions from '../api/apiExecutions';
 import { toast, ToastContainer } from 'react-toastify';
 import JobPathMap from '../jobs/JobPathMap';
@@ -17,7 +17,19 @@ const UserPage = () => {
     const [loading, setLoading] = React.useState(false);
     const [isCreateJobModalVisible, setIsCreateJobModalVisible] = React.useState(false);
 
-    let userData = localStorage.getItem('eshiftCustomer') ? JSON.parse(localStorage.getItem('eshiftCustomer')) : null;
+    let userData = null;
+    if (typeof window !== 'undefined') {
+        userData = localStorage.getItem('eshiftCustomer') ? JSON.parse(localStorage.getItem('eshiftCustomer')) : null;
+    }
+
+    React.useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const customer = localStorage.getItem('eshiftCustomer');
+            if (!customer) {
+                window.location.href = '/auth/customer';
+            }
+        }
+    }, []);
 
     React.useEffect(() => {
         // getJobDetailsOverall(15);
@@ -79,7 +91,6 @@ const UserPage = () => {
 
     return (
         <div style={{ minHeight: '100vh', background: '#fff' }}>
-            {/* Floating Header Bar */}
             <header
                 style={{
                     position: 'fixed',
@@ -90,41 +101,56 @@ const UserPage = () => {
                     color: '#320A6B',
                     padding: '0 0',
                     height: 75,
-                    zIndex: 100,
-                    boxShadow: '0 2px 8px 0 rgba(0,0,0,0.08)',
+                    zIndex: 1200,
+                    boxShadow: '0 4px 16px 0 rgba(50,10,107,0.10)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
+                    borderBottom: '1px solid #eee',
                 }}
             >
-                {/* Left: Logo */}
                 <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
                     <img src="/app.jpeg" alt="Logo" style={{ height: 30, marginLeft: 24, marginRight: 16, borderRadius: 8 }} />
                 </div>
-                {/* Right: Plus and Profile Icons */}
+
                 <div style={{ display: 'flex', alignItems: 'center', gap: 18, marginRight: 24 }}>
-                    {/* Plus Icon for Create New Job */}
                     <Button
+                        style={{ background: '#F0E8FF', borderColor: '#320A6B', color: '#320A6B', fontWeight: 500, fontSize: 14, height: 36, padding: '0 16px', borderRadius: 12 }}
                         icon={<PlusOutlined style={{ color: '#320A6B', fontSize: 16 }} />}
                         onClick={() => setIsCreateJobModalVisible(true)}
                         legacyBehavior>
-
                     </Button>
-                    {/* Profile Icon */}
-                    <Avatar
 
-                        href="/user/profile" legacyBehavior>
-                        <a title="Profile" style={{ color: '#320A6B', fontSize: 26, display: 'flex', alignItems: 'center' }}>
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#320A6B" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c0-4 4-7 8-7s8 3 8 7"></path></svg>
-                        </a>
-                    </Avatar>
+                    <Popover
+                        placement="bottomRight"
+                        trigger="click"
+                        style={{ borderRadius: 12 }}
+                        content={
+                            <div style={{ minWidth: 220 }}>
+                                <div style={{ fontWeight: 600, color: '#320A6B', marginBottom: 6 }}>Customer Details</div>
+                                <div style={{ fontSize: 13, marginBottom: 4 }}><b>Name:</b> {userData?.name || '-'}</div>
+                                <div style={{ fontSize: 13, marginBottom: 4 }}><b>Email:</b> {userData?.email || '-'}</div>
+                                <div style={{ fontSize: 13, marginBottom: 12 }}><b>Customer ID:</b> {userData?.customerId || '-'}</div>
+                                <Button danger block size="small" onClick={() => {
+                                    localStorage.removeItem('eshiftCustomer');
+                                    window.location.href = '/auth/customer';
+                                }}>Logout</Button>
+                            </div>
+                        }
+                    >
+                        <Avatar style={{ background: '#F0E8FF', cursor: 'pointer', color: 'gray', borderColor: '#320A6B', }} size={38} className='textStyle-small'>
+                           {
+                            userData?.name ? userData.name.charAt(0).toUpperCase() : '?'
+                           }
+                        </Avatar>
+                    </Popover>
                 </div>
             </header>
 
             {/* Add padding top to avoid content under header */}
-            <div style={{ paddingTop: 80, paddingLeft: 0, paddingRight: 0 }}>
+            <div style={{ marginTop: 90, paddingLeft: 0, paddingRight: 0 }}>
                 {/* Job Cards Grid List */}
-                <div style={{ padding: '0 26px' }}>
+                <div style={{ padding: '0 26px', background: '#fff', minHeight: 'calc(100vh - 90px)' }}>
                     <Row span={24}>
                         {allJobs && allJobs.length > 0 ? (
                             allJobs.slice().reverse().map(job => (
