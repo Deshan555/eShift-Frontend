@@ -1437,6 +1437,31 @@ const apiExecutions = {
       throw new Error(errorMsg);
     }
   },
+  getDashboardSummary: async () => {
+    try {
+      const response = await axios.get(`${apiConfigurations.baseUrl}/api/Dashboard/summary`);
+      if (response.status >= 200 && response.status < 300) {
+        return response.data;
+      } else {
+        throw new Error(`Failed to fetch dashboard summary: ${response.message}`);
+      }
+    } catch (error) {
+      let errorMsg = 'getDashboardSummary error:';
+      if (error.response && error.response.data) {
+        if (typeof error.response.data === 'string') {
+          errorMsg += ' ' + error.response.data;
+        } else if (error.response.data.message) {
+          errorMsg += ' ' + error.response.data.message;
+        } else {
+          errorMsg += ' ' + JSON.stringify(error.response.data);
+        }
+      } else if (error.message) {
+        errorMsg += ' ' + error.message;
+      }
+      console.error(errorMsg, error);
+      throw new Error(errorMsg);
+    }
+  },
 
 }
 
