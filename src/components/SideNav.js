@@ -24,7 +24,7 @@ const menuItems = [
   { key: 'dashboard', icon: <DotChartOutlined />, label: 'Dashboard', path: '/dashboard' },
   { key: 'admins', icon: <UserOutlined />, label: 'Admins', path: '/admins' },
   { key: 'assistants', icon: <TeamOutlined />, label: 'Assistants', path: '/assistants' },
-  { key: 'branches', icon: <ShopOutlined />, label: 'Branches', path: '/branches' },
+  // { key: 'branches', icon: <ShopOutlined />, label: 'Branches', path: '/branches' },
   { key: 'city', icon: <EnvironmentOutlined />, label: 'City', path: '/city' },
   { key: 'containers', icon: <InboxOutlined />, label: 'Containers', path: '/containers' },
   { key: 'clients', icon: <SolutionOutlined />, label: 'Clients', path: '/clients' },
@@ -37,12 +37,29 @@ const menuItems = [
 ];
 
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 const SideNav = () => {
   const [collapsed, setCollapsed] = useState(false);
   const router = useRouter();
+
+  // Admin authentication check
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const admin = localStorage.getItem('eshiftAdmin');
+      const customer = localStorage.getItem('eshiftCustomer');
+      if (customer && !admin) {
+        // If a normal user is logged in, redirect to user dashboard
+        router.replace('/user');
+        return;
+      }
+      if (!admin) {
+        router.replace('/auth/admin');
+      }
+    }
+  }, [router]);
+
   // Find the menu item whose path matches the current route
   const selectedKey = menuItems.find(item => router.pathname.startsWith(item.path))?.key || 'admins';
   return (
