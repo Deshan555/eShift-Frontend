@@ -10,7 +10,7 @@ const { Option } = Select;
 const LorryManagement = () => {
   const [lorries, setLorries] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isModalVisible, setIsModalVisible] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [selectedLorry, setSelectedLorry] = useState(null);
   const [allBranches, setAllBranches] = useState([]);
