@@ -30,10 +30,10 @@ const menuItems = [
   { key: 'clients', icon: <SolutionOutlined />, label: 'Clients', path: '/clients' },
   { key: 'drivers', icon: <CarOutlined />, label: 'Drivers', path: '/drivers' },
   { key: 'jobs', icon: <FileDoneOutlined />, label: 'Jobs', path: '/jobs' },
-  { key: 'jobstops', icon: <PartitionOutlined />, label: 'Job Stops', path: '/jobstops' },
-  { key: 'load', icon: <AppstoreOutlined />, label: 'Load', path: '/load' },
+  // { key: 'jobstops', icon: <PartitionOutlined />, label: 'Job Stops', path: '/jobstops' },
+  // { key: 'load', icon: <AppstoreOutlined />, label: 'Load', path: '/load' },
   { key: 'lorry', icon: <TruckOutlined />, label: 'Lorry', path: '/lorry' },
-  { key: 'trip', icon: <CompassOutlined />, label: 'Trip', path: '/trip' },
+  // { key: 'trip', icon: <CompassOutlined />, label: 'Trip', path: '/trip' },
 ];
 
 
