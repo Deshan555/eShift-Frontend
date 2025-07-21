@@ -100,6 +100,9 @@ const JobInformations = ({ stops, jobData, allCustomers, allBranches }) => {
                             current={stops?.length > 0 ? stops?.length - 1 : 0}
                             size="small"
                             style={{ marginBottom: 20 }}
+                            // progressDot={(dot, { index }) => (
+                            //     <span style={{ color: index === stops?.length - 1 ? '#320A6B' : '#888' }}>{dot}</span>
+                            // )}
                         >
                             {stops?.map((stop, index) => (
                                 <Step
