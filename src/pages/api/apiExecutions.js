@@ -130,26 +130,11 @@ const apiExecutions = {
   adminLogin: async (loginData) => {
     try {
       const response = await axios.post(`${apiConfigurations.baseUrl}/api/Admin/login`, loginData);
-      if (response.status >= 200 && response.status < 300) {
-        return response.data;
-      } else {
-        throw new Error(`Failed to login admin: ${response.message}`);
-      }
+      return response;
     } catch (error) {
-      let errorMsg = 'adminLogin error:';
-      if (error.response && error.response.data) {
-        if (typeof error.response.data === 'string') {
-          errorMsg += ' ' + error.response.data;
-        } else if (error.response.data.message) {
-          errorMsg += ' ' + error.response.data.message;
-        } else {
-          errorMsg += ' ' + JSON.stringify(error.response.data);
-        }
-      } else if (error.message) {
-        errorMsg += ' ' + error.message;
-      }
-      console.error(errorMsg, error);
-      throw new Error(errorMsg);
+      return error.response ? error.response.data :
+        error.request ? error.request.data :
+          console.error('Error setting up the request:', error.message);
     }
   },
   getAllBranches: async () => {
@@ -754,7 +739,7 @@ const apiExecutions = {
       throw new Error(errorMsg);
     }
   },
-    // Lorry (Vehicle) Endpoints
+  // Lorry (Vehicle) Endpoints
   getAllLorries: async () => {
     try {
       const response = await axios.get(`${apiConfigurations.baseUrl}/api/Lorry`);
@@ -1007,7 +992,7 @@ const apiExecutions = {
       throw new Error(errorMsg);
     }
   },
-    // Customer Endpoints
+  // Customer Endpoints
   getAllCustomers: async () => {
     try {
       const response = await axios.get(`${apiConfigurations.baseUrl}/api/Customer`);
@@ -1337,7 +1322,7 @@ const apiExecutions = {
       throw new Error(errorMsg);
     }
   },
-  getJobsByCustomers : async (customerId) => {
+  getJobsByCustomers: async (customerId) => {
     try {
       const response = await axios.get(`${apiConfigurations.baseUrl}/api/Job/by-user/${customerId}`);
       if (response.status >= 200 && response.status < 300) {
@@ -1432,7 +1417,7 @@ const apiExecutions = {
         }
       } else if (error.message) {
         errorMsg += ' ' + error.message;
-      } 
+      }
       console.error(errorMsg, error);
       throw new Error(errorMsg);
     }
