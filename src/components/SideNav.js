@@ -12,13 +12,16 @@ import {
   PartitionOutlined,
   AppstoreOutlined,
   TruckOutlined,
-  CompassOutlined
+  CompassOutlined,
+  DashOutlined,
+  DotChartOutlined
 } from '@ant-design/icons';
 import Link from 'next/link';
 
 const { Sider } = Layout;
 
 const menuItems = [
+  { key: 'dashboard', icon: <DotChartOutlined />, label: 'Dashboard', path: '/dashboard' },
   { key: 'admins', icon: <UserOutlined />, label: 'Admins', path: '/admins' },
   { key: 'assistants', icon: <TeamOutlined />, label: 'Assistants', path: '/assistants' },
   { key: 'branches', icon: <ShopOutlined />, label: 'Branches', path: '/branches' },
