@@ -5,7 +5,6 @@ import { PlusOutlined, EyeOutlined, EditOutlined, DeleteOutlined } from '@ant-de
 import apiExecutions from '../api/apiExecutions';
 import CityManagement from './management.jsx';
 
-
 const CityPage = () => {
   const [searchText, setSearchText] = useState('');
   const [districtFilter, setDistrictFilter] = useState([]);
