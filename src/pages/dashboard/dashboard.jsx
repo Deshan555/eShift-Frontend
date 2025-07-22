@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DashboardLayout from '../../components/DashboardLayout';
-import { Card, Row, Col } from 'antd';
+import { Card, Row, Col, Breadcrumb } from 'antd';
 import { UserOutlined, TeamOutlined, CarOutlined, ContainerOutlined, SolutionOutlined, UsergroupAddOutlined } from '@ant-design/icons';
 import { PieChart, Pie, Cell, Tooltip, Legend, BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from 'recharts';
-import dynamic from 'next/dynamic';
 
 // http://localhost:5000/api/Dashboard/summary
 
@@ -118,16 +117,24 @@ const Dashboard = () => {
 
     return (
         <DashboardLayout>
-            <h2>Dashboard Summary</h2>
+                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+        <div>
+          <span className='textStyle-small' style={{ fontSize: 18 }}>Dashboard Summary</span>
+          <Breadcrumb style={{ margin: '2px 0' }}>
+            <Breadcrumb.Item className='textStyle-small'>Home</Breadcrumb.Item>
+            <Breadcrumb.Item className='textStyle-small'>Dashboard</Breadcrumb.Item>
+          </Breadcrumb>
+        </div>
+      </div>
             {/* Summary Cards */}
-            <Row span={24} style={{ marginBottom: 32, flexWrap: 'wrap' }}>
+            <Row span={24} style={{ marginBottom: 32, flexWrap: 'wrap', marginTop: 16 }}>
                 {cards.map(card => (
                     <Col key={card.key} xs={24} sm={4} md={4} lg={4} xl={4}>
                         <Card
                             hoverable
                             onClick={() => window.location.href = card.link}
                             style={{
-                                background: card.color,
+                                // background: card.color,
                                 borderRadius: 16,
                                 boxShadow: '0 2px 8px 0 rgba(0,0,0,0.04)',
                                 cursor: 'pointer',
@@ -138,12 +145,15 @@ const Dashboard = () => {
                                 alignItems: 'center',
                                 padding: 0,
                                 width: '96%',
+                                background: '#ffffffff',
                             }}
                             bodyStyle={{ padding: 0, height: '100%' }}
                         >
                             <Row style={{ height: '100%', width: '100%' }} span={24}>
                                 <Col style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }} span={14}>
+                                <div style={{ borderRadius: '50%',  background: card.color, width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                     {card.icon}
+                                </div>
                                 </Col>
                                 <Col style={{ paddingLeft: 12 }} span={10}>
                                     <div style={{ fontSize: 18, fontWeight: 600, color: '#320A6B', marginBottom: 2, lineHeight: '22px' }} className='textStyle-small'>{card.label}</div>
