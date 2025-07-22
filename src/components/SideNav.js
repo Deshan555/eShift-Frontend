@@ -26,14 +26,14 @@ const menuItems = [
   { key: 'assistants', icon: <TeamOutlined />, label: 'Assistants', path: '/assistants' },
   // { key: 'branches', icon: <ShopOutlined />, label: 'Branches', path: '/branches' },
   { key: 'city', icon: <EnvironmentOutlined />, label: 'City', path: '/city' },
-  { key: 'containers', icon: <InboxOutlined />, label: 'Containers', path: '/containers' },
-  { key: 'clients', icon: <SolutionOutlined />, label: 'Clients', path: '/clients' },
+  // { key: 'containers', icon: <InboxOutlined />, label: 'Containers', path: '/containers' },
+  { key: 'clients', icon: <SolutionOutlined />, label: 'Clients', path: '/customers' },
   { key: 'drivers', icon: <CarOutlined />, label: 'Drivers', path: '/drivers' },
   { key: 'jobs', icon: <FileDoneOutlined />, label: 'Jobs', path: '/jobs' },
-  // { key: 'jobstops', icon: <PartitionOutlined />, label: 'Job Stops', path: '/jobstops' },
+  { key: 'jobstops', icon: <PartitionOutlined />, label: 'Job Stops', path: '/stops' },
+  { key: 'trip', icon: <CompassOutlined />, label: 'Trip', path: '/trip' },
   // { key: 'load', icon: <AppstoreOutlined />, label: 'Load', path: '/load' },
   { key: 'lorry', icon: <TruckOutlined />, label: 'Lorry', path: '/lorry' },
-  // { key: 'trip', icon: <CompassOutlined />, label: 'Trip', path: '/trip' },
 ];
 
 
