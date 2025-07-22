@@ -9,7 +9,16 @@ const DashboardLayout = ({ children }) => (
     <SideNav />
     <Layout>
       <Content style={{ margin: '10px', overflow: 'initial' }}>
-        <div style={{ padding: 24, background: '#fff', minHeight: '97vh', borderRadius: '10px' }}>
+        <div
+          style={{
+            padding: 24,
+            background: '#fff',
+            minHeight: '97vh',
+            borderRadius: '10px',
+            maxHeight: '97vh',
+            overflowY: 'auto',
+          }}
+        >
           {children}
         </div>
       </Content>
