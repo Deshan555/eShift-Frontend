@@ -1,11 +1,7 @@
-import React from 'react';
-import DashboardLayout from '../../components/DashboardLayout';
+import dynamic from "next/dynamic";
 
-const TripPage = () => (
-  <DashboardLayout>
-    <h1>Trip</h1>
-    <p>Manage trips here.</p>
-  </DashboardLayout>
-);
+const TripPage = dynamic(() => import('./tripModule'), {
+  ssr: false
+});
 
 export default TripPage;
