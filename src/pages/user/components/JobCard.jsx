@@ -126,7 +126,7 @@ const JobCard = ({ job, refetchFuction }) => {
           <div className="modal-header-user" style={{ backgroundColor: '#F0E8FF', padding: 20 }}>
             <h2 className="header-title">
               <span style={{ fontFamily: 'Poppins', fontWeight: 550, fontSize: 18, letterSpacing: 0, color: '#000000' }}>
-                Define New Job
+                Update Job #{job.jobId}
               </span>
             </h2>
           </div>
