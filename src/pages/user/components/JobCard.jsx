@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import apiExecutions from '@/pages/api/apiExecutions';
-import { Row, Col } from 'antd'; 
+import { Row, Col, Modal } from 'antd';
 import { DeleteFilled, EditFilled, EyeFilled } from '@ant-design/icons';
+import CreateJob from '../../jobs/createJob';
 import 'leaflet/dist/leaflet.css';
 import { icon } from 'leaflet';
 import moment from 'moment';
@@ -15,8 +16,10 @@ const Popup = dynamic(() => import('react-leaflet').then(mod => mod.Popup), { ss
 import { Polyline as SyncPolyline } from 'react-leaflet';
 
 
-const JobCard = ({ job }) => {
+const JobCard = ({ job, refetchFuction }) => {
   const [jobStops, setJobStops] = useState(job.stops || []);
+  const [loading, setLoading] = useState(false);
+  const [isCreateJobModalVisible, setIsCreateJobModalVisible] = useState(false);
 
   useEffect(() => {
     const fetchStops = async () => {
@@ -30,31 +33,31 @@ const JobCard = ({ job }) => {
     if (job) fetchStops();
   }, [job]);
 
-  // Prepare positions for map
   const stopsWithCoords = jobStops.filter(stop => stop.city && stop.city.latitude && stop.city.longitude);
   const positions = stopsWithCoords.map(stop => [stop.city.latitude, stop.city.longitude]);
   const mapCenter = positions.length > 0 ? positions[0] : [6.9271, 79.8612];
 
   return (
-    <div style={{
-      border: '1px solid #e0e0e0',
-      borderRadius: 12,
-      padding: 0,
-      marginBottom: 18,
-      background: '#fff',
-      boxShadow: '0 2px 8px 0 rgba(0,0,0,0.04)',
-      fontFamily: 'Poppins, monospace',
-      fontSize: 14,
-      maxWidth: 600,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    }}>
+    <div
+      style={{
+        border: '1px solid #e0e0e0',
+        borderRadius: 12,
+        padding: 0,
+        marginBottom: 18,
+        background: '#fff',
+        boxShadow: '0 2px 8px 0 rgba(0,0,0,0.04)',
+        fontFamily: 'Poppins, monospace',
+        fontSize: 14,
+        maxWidth: 600,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+      }}>
       {positions.length > 0 && (
         <div style={{ height: 200, marginBottom: 12 }}>
-          <MapContainer center={mapCenter} zoom={10} 
-          zoomControl={false}
-          attributionControl={false}
-          style={{ height: '100%', width: '100%', MozBorderRadiusTopleft: 12, MozBorderRadiusTopright: 12 }} scrollWheelZoom={false}>
+          <MapContainer center={mapCenter} zoom={10}
+            zoomControl={false}
+            attributionControl={false}
+            style={{ height: '100%', width: '100%', MozBorderRadiusTopleft: 12, MozBorderRadiusTopright: 12 }} scrollWheelZoom={false}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <SyncPolyline positions={positions} color="blue" />
             {stopsWithCoords.map((stop, idx) => (
@@ -76,17 +79,17 @@ const JobCard = ({ job }) => {
       <div style={{ padding: 16, borderBottom: '1px solid #e0e0e0' }}>
         <Row gutter={[16, 16]}>
           <Col span={12}>
-                <div 
-      className='textStyle-small'
-      style={{ fontWeight: 700, fontSize: 16, marginBottom: 6, color: 'black' }}>Job #{job.jobId} - {job.status}
-      </div>
+            <div
+              className='textStyle-small'
+              style={{ fontWeight: 700, fontSize: 16, marginBottom: 6, color: 'black' }}>Job #{job.jobId} - {job.status}
+            </div>
           </Col>
 
           <Col span={12} style={{ textAlign: 'right' }}>
             <div style={{ fontSize: 12, color: '#888', marginBottom: 4 }} className='textStyle-small'>
-             {
-              job.deliveryDate ? `${moment(job.deliveryDate).format('DD MMM YYYY')}` : 'Created: N/A'
-            }
+              {
+                job.deliveryDate ? `${moment(job.deliveryDate).format('DD MMM YYYY')}` : 'Created: N/A'
+              }
             </div>
           </Col>
         </Row>
@@ -102,19 +105,41 @@ const JobCard = ({ job }) => {
           </span>
         </div>
 
-        <Row gutter={[8, 8]} style={{ marginTop: 12 }}>
-          <Col span={8}>
-          <EditFilled style={{ marginRight: 4 }} />
-          </Col>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 16, marginTop: 12 }}>
+          {job.adminApprovalStatus === 'PENDING' && (
+            <EditFilled style={{ marginRight: 4, cursor: 'pointer', color: '#320A6B' }} 
+            onClick={() => setIsCreateJobModalVisible(true)} />
+          )}
+          <EyeFilled 
+          onClick={() => window.open(`/inspect/${job.jobId}`, '_blank')}
+          style={{ marginRight: 4, cursor: 'pointer', color: '#320A6B' }} />
+        </div>
 
-          <Col span={8} style={{ textAlign: 'center' }}>
-            <EyeFilled style={{ marginRight: 4 }} />
-          </Col>
-
-          <Col span={8} style={{ textAlign: 'right' }}>
-            <DeleteFilled style={{ marginRight: 4 }} />
-          </Col>
-        </Row>
+        <Modal
+          visible={isCreateJobModalVisible}
+          onCancel={() => setIsCreateJobModalVisible(false)}
+          footer={null}
+          width={800}
+          destroyOnClose
+          className="custom-modal"
+        >
+          <div className="modal-header-user" style={{ backgroundColor: '#F0E8FF', padding: 20 }}>
+            <h2 className="header-title">
+              <span style={{ fontFamily: 'Poppins', fontWeight: 550, fontSize: 18, letterSpacing: 0, color: '#000000' }}>
+                Define New Job
+              </span>
+            </h2>
+          </div>
+          <div className="modal-body">
+            <CreateJob
+              refetchFunction={refetchFuction}
+              onCloseFunction={() => { setIsCreateJobModalVisible(false) }}
+              isEdit={true}
+              stopsList={jobStops}
+              jobData={job}
+            />
+          </div>
+        </Modal>
       </div>
     </div>
   );
