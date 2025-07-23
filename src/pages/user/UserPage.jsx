@@ -124,14 +124,18 @@ const UserPage = () => {
                     <Popover
                         placement="bottomRight"
                         trigger="click"
-                        style={{ borderRadius: 12 }}
+                        style={{ borderRadius: 16}}
                         content={
                             <div style={{ minWidth: 220 }}>
-                                <div style={{ fontWeight: 600, color: '#320A6B', marginBottom: 6 }}>Customer Details</div>
-                                <div style={{ fontSize: 13, marginBottom: 4 }}><b>Name:</b> {userData?.name || '-'}</div>
-                                <div style={{ fontSize: 13, marginBottom: 4 }}><b>Email:</b> {userData?.email || '-'}</div>
-                                <div style={{ fontSize: 13, marginBottom: 12 }}><b>Customer ID:</b> {userData?.customerId || '-'}</div>
-                                <Button danger block size="small" onClick={() => {
+                                <div className='textStyle-small' style={{ fontSize: 13, marginBottom: 5 }}><b>Name:</b> {userData?.name || '-'}</div>
+                                <div className='textStyle-small' style={{ fontSize: 13, marginBottom: 5 }}><b>Full Name:</b> {userData?.fullName || '-'}</div>
+                                <div className='textStyle-small' style={{ fontSize: 13, marginBottom: 5 }}><b>Email:</b> {userData?.emailAddress || '-'}</div>
+                                <div className='textStyle-small' style={{ fontSize: 13, marginBottom: 5 }}><b>Phone Number:</b> {userData?.phoneNumber || '-'}</div>
+
+                                <Button type='primary'
+                                className='textStyle-small' 
+                                style={{ borderRadius: 10, marginTop: 10 }}
+                                danger block size="small" onClick={() => {
                                     localStorage.removeItem('eshiftCustomer');
                                     window.location.href = '/auth/customer';
                                 }}>Logout</Button>
