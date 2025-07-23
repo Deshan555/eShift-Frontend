@@ -147,15 +147,16 @@ const UserPage = () => {
                 </div>
             </header>
 
-            {/* Add padding top to avoid content under header */}
             <div style={{ marginTop: 90, paddingLeft: 0, paddingRight: 0 }}>
-                {/* Job Cards Grid List */}
                 <div style={{ padding: '0 26px', background: '#fff', minHeight: 'calc(100vh - 90px)' }}>
                     <Row span={24}>
                         {allJobs && allJobs.length > 0 ? (
                             allJobs.slice().reverse().map(job => (
                                 <Col key={job.jobId} xs={24} sm={12} md={8} lg={8} style={{ padding: 8 }}>
-                                    <JobCard job={job} />
+                                    <JobCard 
+                                    job={job} 
+                                    refetchFuction={ () => {getJobsByCustomers(userData?.customerId)} }
+                                    />
                                 </Col>
                             ))
                         ) : (
@@ -165,37 +166,7 @@ const UserPage = () => {
                 </div>
             </div>
 
-            {/* <Modal
-        visible={isModalVisible}
-        onCancel={() => setIsModalVisible(false)}
-        destroyOnClose
-        width={700}
-        footer={null}
-        className="custom-modal"
-      >
-        <div className="modal-header-user" style={{ backgroundColor: '#F0E8FF', padding: 20 }}>
-          <h2 className="header-title">
-            <span style={{ fontFamily: 'Poppins', fontWeight: 550, fontSize: 18, letterSpacing: 0, color: '#000000' }}>
-              {isEdit ? 'Edit Driver' : 'Add New Driver'}
-            </span>
-          </h2>
-        </div>
-        <div className="modal-body">
-          <DriversManagementModel
-            isEdit={isEdit}
-            isView={!isEdit}
-            fetchData={() => {
-              fetchDrivers();
-              setIsModalVisible(false);
-              setIsEdit(false);
-              setSelectedDriver(null);
-            }}
-            data={selectedDriver}
-            allBranches={allBranches}
-          />
-        </div>
-      </Modal> */}
-
+       
             <Modal
                 visible={isCreateJobModalVisible}
                 onCancel={() => setIsCreateJobModalVisible(false)}
