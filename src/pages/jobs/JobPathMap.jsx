@@ -13,7 +13,7 @@ export default function JobPathMap({ stops }) {
   if (!stops || stops.length === 0) return null;
   const positions = stops.map(stop => [stop.city.latitude, stop.city.longitude]);
   return (
-    <div style={{ height: '400px', width: '100%', zIndex: 1 }}>
+    <div style={{ height: '100vh', width: '100%', zIndex: 1 }}>
       <MapContainer
          center={positions[0]}
         zoom={10}
