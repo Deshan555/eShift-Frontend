@@ -4,14 +4,16 @@ import { Button, Form, Input, Select, message, Row, Col, DatePicker, Steps, Card
 import { DeleteFilled } from '@ant-design/icons';
 import { ToastContainer, toast } from 'react-toastify';
 import moment from "moment";
+
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
+dayjs.extend(utc);
 
 import apiExecutions from "../api/apiExecutions";
 
 const { Step } = Steps;
 
-const CreateJob = ({refetchFunction, customerID, onCloseFunction}) => {
+const CreateJob = ({refetchFunction, customerID, onCloseFunction, isEdit, stopsList, jobData}) => {
     const [form] = Form.useForm();
     const [currentStep, setCurrentStep] = React.useState(0);
     const [stepsData, setStepsData] = React.useState([]);
@@ -22,6 +24,10 @@ const CreateJob = ({refetchFunction, customerID, onCloseFunction}) => {
 
     React.useEffect(() => {
         fetchAllCities();
+        if (isEdit && jobData) {
+            setJobDetails(jobData);
+            setStepsData(stopsList);
+        }
     }, []);
 
     const fetchAllCities = async () => {
@@ -150,6 +156,67 @@ const CreateJob = ({refetchFunction, customerID, onCloseFunction}) => {
         form.resetFields();
     };
 
+    const updateJobByID = async (values) => {
+        let jobDataJson = {
+            jobId: jobData.jobId,
+            customerId: jobData?.customerId,
+            branchId: 1,
+            status: "PENDING",
+            requestStatus: "INITIAL",
+            deliveryDate: dayjs.utc(values?.deliveryDate).format('YYYY-MM-DD'),
+            specialRemark: values?.specialRemark,
+            requestContainerType: values?.requestContainerType,
+            adminApprovalStatus: "PENDING",
+            invoicingStatus: "UNINVOICED",
+            invoicePrice: 0,
+            paymentStatus: "UNPAID",
+            stops: stepsData
+        };
+        console.log('Updating job data:', jobDataJson);
+        try {
+            let response = await apiExecutions.updateJob(jobDataJson.jobId, jobDataJson);
+            if (response.status === 200 || response.status === 201) {
+                toast.success(<span className='textStyle-small'>Job updated successfully!</span>);
+                await updateStepDataByID(jobDataJson.jobId);
+            } else {
+                toast.error(<span className='textStyle-small'>Error updating job: {response.data.message}</span>);
+            }
+        } catch (error) {
+            toast.error(<span className='textStyle-small'>Error updating job: {error.message}</span>);
+        }
+    };
+
+    // update steps data 
+    const updateStepDataByID = async (jobId) => {
+        for (let idx = 0; idx < stepsData.length; idx++) {
+            const step = stepsData[idx];
+            let jsonInput = {
+                jobId: jobId,
+                stopId: step.stopId,
+                cityId: step.cityId,
+                address: step.address,
+                stopType: step.stopType,
+                stopOrder: idx + 1,
+                jobStatus: "PENDING"
+            };
+            try {
+                let response = await apiExecutions.updateJobStop(jsonInput.stopId, jsonInput);
+                if (response.status !== 200 && response.status !== 201) {
+                    throw new Error('Failed to update job stop');
+                }
+                toast.success(<span className='textStyle-small'>Job stop updated successfully!</span>);
+            } catch (error) {
+                toast.error(<span className='textStyle-small'>Error updating job stop: {error.message}</span>);
+            }
+        }
+        refetchFunction();
+        onCloseFunction();
+        setCurrentStep(0);
+        setStepsData([]);
+        setJobDetails({});
+        form.resetFields();
+    };
+
     const steps = [
         {
             title: <span className='textStyle-small' style={{ fontWeight: 550 }}>Job Details</span>,
@@ -157,7 +224,7 @@ const CreateJob = ({refetchFunction, customerID, onCloseFunction}) => {
                 <Form
                     layout="vertical"
                     form={form}
-                    initialValues={jobDetails}
+                    // initialValues={jobDetails}
                 >
                     <Row span={24}>
                         <Col span={12}>
@@ -165,6 +232,7 @@ const CreateJob = ({refetchFunction, customerID, onCloseFunction}) => {
                                 label={<span className='textStyle-small' style={{ fontWeight: 550 }}>Request Container Type</span>}
                                 name="requestContainerType"
                                 rules={[{ required: true, message: <span className='textStyle-small'>Please select container type</span> }]}
+                                initialValue={isEdit ? jobData.requestContainerType : undefined}
                             >
                                 <Select placeholder="Select container type" className='custom-Select' bordered={false} style={{ width: '98%' }}>
                                     {['20ft', '40ft', '45ft', 'Others'].map(type => (
@@ -180,6 +248,7 @@ const CreateJob = ({refetchFunction, customerID, onCloseFunction}) => {
                                 label={<span className='textStyle-small' style={{ fontWeight: 550 }}>Delivery Date</span>}
                                 name="deliveryDate"
                                 rules={[{ required: true, message: <span className='textStyle-small'>Please select a delivery date</span> }]}
+                                initialValue={isEdit ? dayjs.utc(jobData.deliveryDate) : null}
                             >
                                 <DatePicker 
                                 format="YYYY-MM-DD"
@@ -192,6 +261,7 @@ const CreateJob = ({refetchFunction, customerID, onCloseFunction}) => {
                                 label={<span className='textStyle-small' style={{ fontWeight: 550 }}>Special Remark</span>}
                                 name="specialRemark"
                                 rules={[{ required: true, message: <span className='textStyle-small'>Please enter a special remark</span> }]}
+                                initialValue={isEdit ? jobData.specialRemark : undefined}
                             >
                                 <Input.TextArea
                                     placeholder="Enter special remark"
@@ -230,17 +300,21 @@ const CreateJob = ({refetchFunction, customerID, onCloseFunction}) => {
                     }
                     {stepsData.map((step, idx) => (
                         <div key={idx} style={{ display: 'flex', gap: 5, alignItems: 'center', marginBottom: 8 }}>
+                            {/* <pre>
+                                {JSON.stringify(step, null, 2)}
+                            </pre> */}
                             <Form.Item
                                 layout="vertical"
                                 required
                                 style={{ flex: 2, marginBottom: 0 }}
+                                initialValue={isEdit ? step?.cityId : undefined}
                             >
                                 <Select
                                     placeholder="Select city"
                                     className='custom-Select'
                                     bordered={false}
                                     style={{ width: '100%' }}
-                                    value={step.city}
+                                    value={isEdit ? step?.city?.cityId : step.city}
                                     onChange={value => handleStepChange(idx, 'city', value)}
                                     filterOption={(input, option) =>
                                         option.children.toLowerCase().includes(input.toLowerCase())
@@ -331,7 +405,12 @@ const CreateJob = ({refetchFunction, customerID, onCloseFunction}) => {
                                         title={<span className='textStyle-small'>{step.stopType || 'Stop'}</span>}
                                         description={
                                             <span className='textStyle-small'>
-                                                {allCities.find(city => city.cityId === step.city)?.name || 'N/A'}
+                                                {
+                                                    isEdit && step.city?.name
+                                                        ? step.city.name
+                                                        : allCities.find(city => city.cityId === step.city)?.name || 'N/A'
+                                                }
+                                                {/* {allCities.find(city => city.cityId === step.city)?.name || 'N/A'} */}
                                                 {step.address && <span style={{ color: '#888' }}> - {step.address}</span>}
                                             </span>
                                         }
@@ -372,8 +451,12 @@ const CreateJob = ({refetchFunction, customerID, onCloseFunction}) => {
                     </Button>
                 )}
                 {currentStep === steps.length - 1 && (
-                    <Button type="primary" onClick={createNewJob} style={{ backgroundColor: '#320A6B', borderColor: '#320A6B', height: 38, borderRadius: 12 }}>
-                        <span className='textStyle-small' style={{ fontWeight: 550, color: 'whitesmoke' }}>Create Job</span>
+                    <Button type="primary" onClick={
+                        isEdit ? () => updateJobByID(jobDetails) : createNewJob
+                    } style={{ backgroundColor: '#320A6B', borderColor: '#320A6B', height: 38, borderRadius: 12 }}>
+                        <span className='textStyle-small' style={{ fontWeight: 550, color: 'whitesmoke' }}>
+                            {isEdit ? 'Update Job' : 'Create Job'}
+                        </span>
                     </Button>
                 )}
             </div>
