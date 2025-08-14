@@ -4,7 +4,17 @@ import { Table, Modal, Form, Input, Select, Space, Button, Tag, Breadcrumb, mess
 import apiExecutions from '../api/apiExecutions';
 import moment from 'moment';
 import AdminManagement from './management';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, ExceptionOutlined } from '@ant-design/icons';
+
+const getAllKeys = (data) => {
+  if (!Array.isArray(data) || data.length === 0) return [];
+  return Array.from(
+    data.reduce((acc, item) => {
+      Object.keys(item).forEach((key) => acc.add(key));
+      return acc;
+    }, new Set())
+  );
+};
 
 const AdminsPage = () => {
   const [admins, setAdmins] = React.useState([]);
@@ -14,6 +24,8 @@ const AdminsPage = () => {
   const [isEdit, setIsEdit] = React.useState(false);
   const [isView, setIsView] = React.useState(false);
   const [selectedAdmin, setSelectedAdmin] = React.useState(null);
+
+  const [exportModal, setExportModal] = React.useState(true);
 
   React.useEffect(() => {
     fetchAdmins();
@@ -84,6 +96,13 @@ const AdminsPage = () => {
         >
           <span className='textStyle-small' style={{ fontWeight: 550 }}>New Admin</span>
         </Button>
+
+        <Button icon={<ExceptionOutlined />} shape='square' style={{ marginLeft: 8 }} onClick={() => {
+          setIsModalVisible(true);
+          setIsEdit(false);
+          setIsView(true);
+          setSelectedAdmin(null);
+        }} />
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 18 }}>
@@ -153,6 +172,32 @@ const AdminsPage = () => {
           )}
         />
       </Table>
+
+      <Modal 
+        title="Export Admins"
+        visible={exportModal}
+        onCancel={() => setExportModal(false)}
+        footer={null}
+        width={600}
+        className="custom-modal"
+      >
+        <div style={{ padding: 20 }}>
+          {
+            getAllKeys(admins).length > 0 ? (
+              <div>
+                <h3 className='textStyle-small'>Available Fields:</h3>
+                <ul>
+                  {getAllKeys(admins).map(key => (
+                    <li key={key} className='textStyle-small' style={{ fontSize: 12 }}>{key}</li>
+                  ))} 
+                </ul>
+              </div>
+            ) : (
+              <p className='textStyle-small'>No available fields to export.</p>
+            )
+          }
+        </div>
+      </Modal>
     </DashboardLayout>
   );
 };
