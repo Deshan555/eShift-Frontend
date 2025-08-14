@@ -4,11 +4,45 @@
 ## Project Overview
 eShift is a modern logistics and fleet management platform designed to streamline operations for transport companies and logistics providers. It solves the challenges of real-time job tracking, driver management, and reporting, providing an intuitive interface for dispatchers, managers, and drivers.
 
+
 **Target Users:**
 - Logistics companies
 - Fleet managers
 - Dispatchers
 - Drivers
+
+---
+
+## 🚦 Workflow Breakdown
+
+### 1. Customer Job Creation 📝
+- Customers register via the portal and define a new job.
+- A job can include multiple **JobStops** (one-to-many relationship, e.g., pickup and delivery points).
+- Upon job creation, the backend automatically generates a **Trip** linked to the job.
+
+### 2. Admin Job Approval and Trip Assignment ✅
+- Admins review and approve jobs.
+- Post-approval, admins assign:
+	- 🏗️ A **Container** and 🚚 **Truck** for the trip.
+	- 👨‍✈️ A **Driver** and optionally an 🧑‍🤝‍🧑 **Assistant**.
+- The trip is scheduled and marked as **START** 🚦.
+
+### 3. Load Creation ⚖️
+- Once the trip starts, a **Load** record is created, capturing:
+	- ⚖️ Weight
+	- 📦 Volume
+	- 🔢 Start and end meter readings (for tracking distance or fuel usage).
+
+### 4. Job Completion and Slip Generation 🧾
+- After the job is completed, admins generate a **Slip** (e.g., delivery receipt, invoice, or proof of completion).
+
+### 5. Admin Portal Features 🛠️
+- **Custom Management:** Manage customers, roles, vehicles, and drivers.
+- **Dashboards:** 📊 Overview of operations (active trips, pending jobs).
+- **Dynamic Reports:** 📈 Customizable reports for metrics like trip efficiency, driver performance, or job completion rates.
+- **Live Map Integrations:** 🗺️ Real-time tracking of vehicles or trips, using APIs like Google Maps, Mapbox, etc.
+
+---
 
 ## Features
 - Real-time job and trip tracking
