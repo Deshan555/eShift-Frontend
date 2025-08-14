@@ -1,56 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
 
-## Getting Started
+# eShift Frontend
 
-First, run the development server:
+## Project Overview
+eShift is a modern logistics and fleet management platform designed to streamline operations for transport companies and logistics providers. It solves the challenges of real-time job tracking, driver management, and reporting, providing an intuitive interface for dispatchers, managers, and drivers.
 
+**Target Users:**
+- Logistics companies
+- Fleet managers
+- Dispatchers
+- Drivers
+
+## Features
+- Real-time job and trip tracking
+- Interactive dashboard and analytics
+- Driver and vehicle management
+- Invoice generation and reporting
+- Route mapping and optimization
+- Role-based access control (Admins, Assistants, Drivers, etc.)
+- Customizable stops and job paths
+- Secure authentication and authorization
+
+## Tech Stack
+- **Frontend:** Next.js, React
+- **Languages:** JavaScript, JSX
+- **Styling:** CSS Modules, Custom CSS
+- **State Management:** React Context API
+- **APIs:** RESTful API integration
+- **Tools:** ESLint, Vercel (deployment)
+
+## Installation
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/Deshan555/eShift-Frontend.git
+cd eShift-Frontend/frontend
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+**Example:**
+- Log in as an admin to access the dashboard and manage jobs.
+- Use the sidebar to navigate between modules (Drivers, Jobs, Reports, etc.).
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Configuration
+Set up the following environment variables in a `.env.local` file:
+```env
+NEXT_PUBLIC_API_BASE_URL=<your_api_url>
+NEXT_PUBLIC_MAP_API_KEY=<your_map_api_key>
+```
+Adjust other settings in `next.config.mjs` as needed.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+## Folder Structure
+```
+frontend/
+├── public/           # Static assets (images, icons)
+├── screenshots/      # Project screenshots
+├── src/
+│   ├── components/   # Reusable React components
+│   ├── pages/        # Next.js pages and API routes
+│   └── styles/       # CSS and font files
+├── package.json      # Project metadata and dependencies
+├── next.config.mjs   # Next.js configuration
+└── README.md         # Project documentation
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Screenshots
+<table>
+	<tr>
+		<td><img src="screenshots/Screenshot%202025-07-18%20at%2019.34.37.png" width="250"/><br/>Screenshot 1</td>
+		<td><img src="screenshots/Screenshot%202025-07-18%20at%2019.34.51.png" width="250"/><br/>Screenshot 2</td>
+		<td><img src="screenshots/Screenshot%202025-07-18%20at%2022.34.10.png" width="250"/><br/>Screenshot 3</td>
+	</tr>
+	<tr>
+		<td><img src="screenshots/Screenshot%202025-07-18%20at%2022.34.22.png" width="250"/><br/>Screenshot 4</td>
+		<td><img src="screenshots/Screenshot%202025-07-18%20at%2022.34.27.png" width="250"/><br/>Screenshot 5</td>
+		<td><img src="screenshots/Screenshot%202025-07-18%20at%2022.34.42.png" width="250"/><br/>Screenshot 6</td>
+	</tr>
+	<tr>
+		<td><img src="screenshots/Screenshot%202025-07-18%20at%2022.34.50.png" width="250"/><br/>Screenshot 7</td>
+		<td><img src="screenshots/Screenshot%202025-07-18%20at%2023.45.46.png" width="250"/><br/>Screenshot 8</td>
+		<td><img src="screenshots/Screenshot%202025-07-18%20at%2023.45.55.png" width="250"/><br/>Screenshot 9</td>
+	</tr>
+</table>
 
-## Learn More
+<!-- Add more screenshots as needed -->
 
-To learn more about Next.js, take a look at the following resources:
+## Contributing
+Contributions are welcome! Please follow these steps:
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/your-feature`)
+3. Commit your changes
+4. Open a pull request
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+**Guidelines:**
+- Write clear, descriptive commit messages
+- Follow the existing code style and structure
+- Ensure all tests pass before submitting
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
+This project is licensed under the MIT License. See the [LICENSE](../LICENSE) file for details.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
-
-# ✅ Project Task Table
-
-| No. | Task Description                                                                 | Effort (Days) | Complexity | Priority | Completed |
-|-----|-----------------------------------------------------------------------------------|---------------|------------|----------|-----------|
-| 1   | The Application User Interface                                                   | 2             | 5          | 10       | ❌        |
-| 2   | Task 1: Customer Details and Management                                           | 2             | 5          | 10       | ❌        |
-| 3   | Task 2: Only Admin Can Manage Admin Details                                       | 3             | 5          | 15       | ❌        |
-| 4   | Task 3: Admin Login and Customer Login                                            | 2             | 5          | 10       | ❌        |
-| 5   | Task 4: Customer Transport Operation Detail Management                            | 3             | 5          | 15       | ❌        |
-| 6   | Task 5: Only Admin Can Accept/Decline and Update Customer Transport Operation     | 3             | 5          | 15       | ❌        |
-| 7   | Task 6: Customer Dashboard                                                        | 3             | 5          | 15       | ❌        |
-| 8   | Task 7: Admin Dashboard                                                           | 2             | 5          | 10       | ❌        |
-| 9   | Task 8: Only Admin Can Manage Product Details                                     | 2             | 5          | 10       | ❌        |
-| 10  | Task 9: Only Admin Can Generate Various Reports                                   | 2             | 5          | 10       | ❌        |
-| 11  | Task 10: Admin Dashboard                                                          | 2             | 5          | 10       | ❌        |
+## Contact
+- **Author:** Deshan
+- **Email:** your.email@example.com
+- **GitHub:** [Deshan555/eShift-Frontend](https://github.com/Deshan555/eShift-Frontend)
